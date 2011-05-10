@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{1}{14.4.2011}{5.5.2011}{}
+
+Beachten Sie bitte die Hinweise zu den "Ubungen!
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(Entropie)}\\
+Eine Informationsquelle sende Buchstaben aus dem Alphabet $\Sigma=\{a,b,c,d,e\}$ mit den Wahrscheinlichkeiten $P(a)=0,15$, $P(b)=0,04$, $P(c)=0,26$, $P(d)=0,05$ und $P(e)=0,5$.
+\begin{enumerate}
+\item Berechnen Sie die Entropie der Quelle!
+\item Bestimmen Sie einen Huffmann-Code f"ur diese Quelle per Hand!
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(Programmieraufgaben)}\\
+Bitte beachten Sie die Hinweise zu den Programmieraufgaben.
+
+\smallskip
+Schreiben Sie Routinen, die folgende Aufgaben erf"ullen:
+\begin{enumerate}
+\item Einfache Statistik: Gibt an, welche Bytes in einer Datei vorkommen und wie oft jedes Byte vorkommt.
+\item Entropie: Eingabe eine Liste von Zeichenh"aufigkeiten einer Quelle, Ausgabe die Entropie der Quelle.
+\item Entropie: Berechnet die Entropie einer Datei, wobei als Zeichen Bytes verwendet werden.
+\item(*) Erweitern Sie obige Routinen, so dass sie auch mit Alphabeten von $n$ Bytes arbeiteten. Hat die Eingabe nicht eine L"ange, die ein vielfaches von $n$ ist, so padden sie sie mit 0-Bytes.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 3  \quad(Empirische Tests)}\\
+\begin{enumerate}
+\item(*) Generieren Sie eine Datei, bei der der Kompressionsquotient gr"o{\ss}er als 1 ist!
+\item\label{a} Laden sie die Beispieldateien zum "Ubungsblatt herunter und nutzen Sie Ihr Programm um die Entropien der Dateien byteweise zu ermitteln!
+\item Berechnen Sie mit Hilfe der Entropie die erwarteten minimalen Codel"angen der \verb$*.tex$-Dateien. Wenden sie ein Programm wie \verb$gzip$ auf diese Dateien an und Vergleichen sie deren Gr"o{\ss}e mit der erwarteten minimalen Codel"ange.
+
+Interpretieren Sie das Ergebnis!
+\item(*) Ermitteln Sie die Entropien der Dateien aus Teil \ref{a} f"ur Alphabetgr"o{\ss}en \`a 3 und 5 Byte!
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 4  \quad(Arithmetisches Kodieren)}\\
+In dieser Aufgabe greifen wir dem Stoff ein wenig vor. Ihre Aufgabe ist es,
+Funktionen zum arithmetschen Kodieren eines Strings zu entwerfen.
+
+\bigskip
+
+Bei der arithmetischen Kodierung wird einer Folge von Zeichen eine Dezimalzahl
+im Intervall $[0,1)$ bzw. ein Bruch zugeordnet. Dazu wird jedem Zeichen Anhand
+der H"aufigkeit ein Bereich in dem Intervall zugeordnet, dann wird beim Einlesen
+eines Zeichens das Startintervall auf den Bereich zusammengeschrumpft. Das
+neue Intervall wird nun wieder in Bereiche unterteilt, und der Algorithmus wird
+rekursiv angewandt. Ist das letzte Zeichen eingelesen, wird eine beliebige
+Zahl im "ubriggebliebenen Intervall als Ausgabe gew"ahlt, zusammen mit der
+Anzahl der Zeichen die eingelesen wurden.
+
+Decodierung erfolgt analog: Mit der Ausgabe und der Anzahl der Zeichen wird
+"uberpr"uft in welchem Teilintervall von $[0,1)$ die Zahl liegt. Dann wird
+das Zeichen dieses Teilintervalls an die Ausgabe geh"angt, das Teilintervall
+wird nun betrachtet, wieder in Bereiche aufgeteilt und der Algorithmus wird
+rekursiv angewendet, bis die Anzahl der gelesenen Zeichen der L"ange der
+Ausgabe entspricht.
+
+\bigskip
+
+Beispiel: Zeichensatz ${a, b}$, Eingabe zu Codieren: 'abba'. Das Intervall
+wird aufgeteilt in zwei H"alften, die untere H"alfte f"ur $a$, die obere
+f"ur $b$. Wir fangen an mit Intervall $[0,1)$, lesen Zeichen 'a'. Das neue
+Intervall wird daher $[0,0.5)$. Das n"achste Zeichen ist 'b', daher wird
+das neue Intervall $[0.25,0.5)$. Wieder 'b', f"uhrt zu $[0.375,0.5)$.
+Das letzte Zeichen, 'a' f"uhrt zum Intervall $[0.375,0.4375)$. Aus diesem
+Intervall w"ahlen wir jetzt eine beliebige Zahl als R"uckgabewert, z.B.
+$0.375$, die L"ange der Codierten Zeichen ist damit $4$.
+
+R"uckrichtung: gleicher Zeichensatz und Verteilung, Zahl ist $0.375$, L"ange
+ist $4$. Wir fangen an mit dem Intervall $[0,1)$. $0.375$ ist in der
+unteren H"alfte, d.h. zur Ausgabe kommt 'a' hinzu und das neue Intervall ist
+$[0,0.5)$. $0.375$ ist hier in der oberen H"alfte, d.h. ein 'b' kommt zur
+Ausgabe und wir erhalten $[0.25,0.5)$. Wir wenden das weiter an, bis wir
+die L"ange der Ausgabe erhalten haben, da sind wir wieder im Intervall
+$[0.375,0.4375)$, die Ausgabe ist 'abba'.
+
+\bigskip
+
+F"ur Ihre Implementation d"urfen Sie den Zeichensatz einschr"anken, soweit
+Sie dies dokumentieren. Alle lateinischen Buchstaben in Standard-ASCII
+sollten allerdings vertreten sein. Verwenden Sie eine gleichm"assige
+Verteilung der Zeichen auf das Intervall zur Vereinfachung der Implementation.
+
+Verwenden Sie f"ur die R"uckgabewerte entsprechend Ihrer Programmiersprache
+typische Konstrukte: In Java bietet es sich an, f"ur den R"uckgabewert eine
+Klasse zu definieren. In C oder Pascal w"ahren Structs bzw. Records sinnvoll,
+in LISP-Dialekten stattdessen Listen.
+
+\begin{enumerate}
+\item (*) Schreiben Sie Routinen zur Codierung des Strings: Gegeben ein String
+      \verb$s$ soll die Funktion \verb$EncodeArithmetic$ entweder eine
+      Dezimalzahl im Intervall $[0,1)$ oder einen Bruch zur"uckgeben, der wie
+      beschrieben codiert ist. Weiterhin soll die Funktion die L"ange der
+      Eingabe zur"uckgeben.
+\item (*) Schreiben Sie Routinen zur Decodierung: Gegeben dem R"uckgabewert der
+      \verb$EncodeArithmetic$ Funktion soll die \verb$DecodeArithmetic$ Funktion
+      den String rekonstruieren.
+\item (*) "Uberpr"ufen Sie Ihre Implementation mit kurzen und langen Strings.
+\item (*) "Uberlegen Sie sich, welche Probleme bei der Implementierung im
+      Computer auftreten k"onnen.
+\item (*) "Uberlegen Sie sich, wie Sie das Verfahren von dieser vereinfachten
+      arithmetischen Codierung verbessern k"onnen. "Uberlegen Sie sich dabei
+      getrennt Verbesserungen in Ausgabegr"osse und
+      Codierungs-/Decodierungsaufwand.
+\end{enumerate}
+
+\bigskip
+
+{\bf Hinweise zu den Programmieraufgaben}\\
+Die f"ur die Programmieraufgaben vorgesehene Programmiersprache ist Java. Wenn Sie die "Ubungen in einer anderen Programmiersprache abgeben wollen, so wenden Sie sich an den Betreuer der "Ubungsgruppen.
+
+Allgemein: Die Abgaben erfolgen elektronisch in Form von gut dokumentiertem und compilierf"ahigen Quellcode.
+
+Sofern nicht anders angegeben, sollen die geforderten Programme die zu bearbeitende Datei als ersten Kommandozeilenparameter erhalten.
+
+Die auf diesem Blatt erstellten Routinen werden in den weiteren "Ubungen gebraucht werden. Erstellen Sie die in Aufgabe 2 geforderten Aufgaben in Biblotheksform und erstellen Sie mit deren Hilfe die f"ur Aufgabe 3 geforderten Programme.
+
+Nutzen Sie f"ur das Einlesen der Datei in Java die Klasse \verb$FileInputStream$, um die Datei in Form von Bytes zu einzulesen.
+
+Unter Windows k"onnen die Ergebnisse wegen der unterschiedlichen Darstellung des Zeilenendsymbols abweichen.
+\end{document}
+
