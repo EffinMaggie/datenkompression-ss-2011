@@ -1,7 +1,7 @@
-SOURCETOOLS=$(wildcard tools/*.java)
-SOURCEUTIL=$(wildcard util/*.java)
-SOURCETEST=$(wildcard tests/*.java)
-SOURCETASKS=$(wildcard tasks/*.java)
+SOURCETOOLS=$(wildcard DataCompression/tools/*.java)
+SOURCEUTIL=$(wildcard DataCompression/util/*.java)
+SOURCETEST=$(wildcard DataCompression/tests/*.java)
+SOURCETASKS=$(wildcard DataCompression/tasks/*.java)
 
 
 JAVAC=javac
@@ -12,7 +12,7 @@ SOURCE=$(SOURCETOOLS) $(SOURCEUTIL) $(SOURCETEST) $(SOURCETASKS)
 OBJECTS=$(SOURCE:.java=.class)
 
 %.class: %.java
-	$(JAVAC) -cp .. $<
+	$(JAVAC) -cp . $<
 
 all: $(OBJECTS)
 
@@ -22,10 +22,10 @@ doc:
 
 .PHONY : clean
 clean:
-	@rm -f util/*.class
-	@rm -f tools/*.class
-	@rm -f tests/*.class
-	@rm -f tasks/*.class
+	@rm -f DataCompression/util/*.class
+	@rm -f DataCompression/tools/*.class
+	@rm -f DataCompression/tests/*.class
+	@rm -f DataCompression/tasks/*.class
 	@rm -f $(OBJECTS)
 	@rm -rf doc/*
 
