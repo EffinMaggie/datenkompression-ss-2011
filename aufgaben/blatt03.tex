@@ -1,0 +1,109 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+%\usepackage{fullpage}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{3}{12.05.2011}{19.5.2011}{}
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(RLE) }
+
+Die {\em Laufl"angenkodierung}, englisch {\em run-length encoding} ({\em RLE}),
+wird oft zusammen mit anderen Verfahren zur Komprimierung eingesetzt.
+
+In dieser Aufgabe erstellen Sie eine Klasse {\em RLE}, welche genau diese
+Kodierung implementiert.
+
+\begin{enumerate}
+\item Schreiben Sie eine Routine {\em EncodeRLE}, welche einen String "ubergeben
+      kriegt und eine Liste (oder ein Array) von Tupeln der Form $(Z,n)$
+      zur"uckgibt, wobei $Z$ das eingelesene Zeichen ist und $n$ die Anzahl, wie
+      oft das Zeichen wiederholt wird.
+\item Schreiben Sie die Umkehrfunktion {\em DecodeRLE}, welche die Ausgabe von
+      {\em EncodeRLE} "ubergeben kriegt und daraus den Originalstring errechnet.
+\item Testen Sie Ihre Implementation.
+\item Welche anderen Kodierungen kennen Sie, mit denen Sie den Wirkungsgrad der
+      Laufl"angenkodierung verbessern k"onnten? Begr"unden Sie.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(RLE)}
+
+In dieser Aufgabe erweitern Sie Ihre {\em RLE}-Klasse aus Aufgabe 1.
+
+\begin{enumerate}
+\item Erweitern Sie Ihre {\em RLE}-Klasse, sowie den R"uckgabewert der
+      {\em EncodeRLE}-Funktion so, dass Sie beide jeweils in einer Datei ablegen
+      und wieder auslesen k"onnen. Es ist dabei ausdr"ucklich gestattet, dass
+      Sie daf"ur Features ihrer Sprache verwenden, z.B. die Serialisierungs-API
+      in Java.
+\item Erweitern Sie die Klasse so, dass Sie ein beliebiges Alphabet f"ur die
+      Kodierung und Dekodierung vorgeben k"onnen. Das Alphabet soll auch
+      kurze Zeichenfolgen als einzelne Zeichen im Sinne der Kodierung erlauben.
+\item(*) Erweitern Sie die Klasse so, dass Sie Bit-f"ur-Bit arbeiten k"onnen.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 3  \quad(PPM)}
+
+Es ist Ihnen bei dieser Aufgabe freigestellt, ob Sie die Abgabe von Hand oder
+mit einem Computerprogramm l"osen wollen. Die Abgabe erfordert daher keinen
+Programmcode.
+
+\begin{enumerate}
+\item Berechnen Sie die Wahrscheinlichkeitsmodelle nullter und erster Ordnung
+      f"ur die unten stehenden Beispiels"atze. Verwenden Sie hierf"ur geeignete
+      Tabellen. Es gen"ugt, wenn Sie sich zwei der S"atze herauspicken.
+\item Wie Sie bemerkt haben, handelt es sich bei den Beispiels"atzen um
+      Pangramme. Welche Vorteile ergeben sich dadurch f"ur eine arithmetische
+      Kodierung die auf Wahrscheinlichkeitsmodellen von diesen S"atzen beruhen?
+\item Kodieren Sie zwei beliebige W"orter (mindestens f"unf Buchstaben)
+      arithmetisch unter Benutzung der Wahrscheinlichkeitsmodelle die Sie
+      berechnet haben, d.h. berechnen Sie jedes Wort erst mit den Modellen von
+      einem Satz, dann mit denen von einem anderen.
+\item Welche Unterschiede zwischen den Kodierungen stellen Sie fest? Erkl"aren
+      Sie.
+\end{enumerate}
+
+Beispiels"atze:
+\begin{enumerate}
+\item Amazingly few discotheques provide jukeboxes.
+\item Bored? Craving a pub quiz fix? Why, just come to the Royal Oak!
+\item The quick onyx goblin jumps over the lazy dwarf.
+\item The wizard quickly jinxed the gnomes before they vaporized.
+\end{enumerate}
+
+\end{document}
