@@ -1,0 +1,90 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+%\usepackage{fullpage}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{4}{19.05.2011}{26.5.2011}{}
+
+\bigskip
+
+{\bf Zum Blatt}\\
+Auf diesen Blatt sollen Sie sich zwei der Aufgaben aussuchen und diese
+bearbeiten. Bei Abgabe von allen drei Aufgaben z"ahlen die zwei besten.
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(Burrows-Wheeler) }\\
+\begin{enumerate}
+\item Schreiben Sie Routinen zur Berechnung der {\em Burrows-Wheeler}-Transformation und ihrer Umkehrung.
+\item Warum ist es sinnvoll, nach der {\em Burrows-Wheeler}-Transformation die {\em Move to Front}-Transformation anzuwenden?
+\item Schreiben Sie ein Programm, dass zun"achst die  {\em Burrows-Wheeler}-Transformation und dann die {\em Move to Front}-Transformation anwendet.
+\item Testen Sie Ihr Programm an den Eingabedaten von Blatt 1.
+\item Lassen sich durch die Anwendung beider Verfahren Vorteile bei der Datenkompression erwarten?
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(LZ77)}\\
+\begin{enumerate}
+\item Warum ist LZ77 (nicht) zur online Komprimierung geeignet? Also z.B. zur Komprimierung von interaktiven Netzwerkverbindungen wie SSH.
+\item\label{a} Implementieren Sie den {\bf LZ77}-Algorithmus. Beim Erstellen der Klasse sollen die Gr"o{\ss}en des Absuch- und des Kodierpuffers w"ahlbar sein.
+
+Die Ausgabe des Algorithmus sind Tripel wie auf den Folien beschrieben. Das heisst es ist keine Komprimierung oder Bin"arkodierung dieser Tripel notwendig.
+
+\item Implementieren sie die Dekodierung zu Teilaufgabe \ref{a}.
+\item Experimentieren Sie mit Ihrem Algorithmus mit verschiedenen Eingaben und verschiedenen Gr"o{\ss}en f"ur die Gr"o{\ss}en von Absuch- und Kodierpuffer. "Uberlegen Sie sich sinnvolle Gr"o{\ss}en, zu Testzwecken (kurze Begr"undung) und analysieren Sie die Ausgaben im Hinblick auf zu erreichende Kompressionsraten.
+
+"Uberlegen Sie, wie sie die Ausgabe ihres Algorithmus kodieren k"onnen, um (bei geeigneten Eingaben) eine tats"achliche Kompression zu erreichen.
+
+\item(*) Implementieren Sie ihren Algorithmus so, dass Sie tats"achlich Daten komprimieren k"onnen.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 3  \quad(LZW)}\\
+\begin{enumerate}
+\item Warum ist LZW (nicht) zur online Komprimierung geeignet? Also z.B. zur Komprimierung von interaktiven Netzwerkverbindungen wie SSH.
+\item\label{3a} Implementieren Sie die den {\bf LZW}-Algorithmus. Beim Erstellen der Klasse soll als Parameter die Gr"o{\ss}e des W"orterbuchs (=Anzahl der Eintr"age) "ubergeben werden k"onnen.
+
+Die Ausgabe des Algorithmus sind Indizes wie auf den Folien beschrieben. Das heisst es ist keine Komprimierung oder Bin"arkodierung dieser Indizes notwendig.
+
+\item Implementieren sie die Dekodierung zu Teilaufgabe \ref{3a}.
+\item Experimentieren Sie mit Ihrem Algorithmus mit verschiedenen Eingaben und verschiedenen Gr"o{\ss}en f"ur das W"orterbuch. "Uberlegen Sie sich sinnvolle Gr"o{\ss}en, zu Testzwecken (kurze Begr"undung) und analysieren Sie die Ausgaben im Hinblick auf zu erreichende Kompressionsraten.
+
+"Uberlegen Sie, wie sie die Ausgabe ihres Algorithmus kodieren k"onnen, um (bei geeigneten Eingaben) eine tats"achliche Kompression zu erreichen.
+
+\item(*) Implementieren Sie ihren Algorithmus so, dass Sie tats"achlich Daten komprimieren k"onnen.
+\end{enumerate}
+
+\end{document}
+
