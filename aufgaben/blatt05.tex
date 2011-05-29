@@ -1,0 +1,143 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+%\usepackage{fullpage}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{5}{26.05.2011}{05.06.2011}{}
+
+\bigskip
+{\bf Zum Blatt}\\
+Sie d"urfen sich wieder wie auf Blatt 4 vier der Aufgaben aussuchen. Beachten
+Sie, dass Sie f"ur dieses Blatt bis Sonntag um Mitternacht Zeit haben.
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(Entropie)}\\
+Zeigen Sie: Ist $X$ eine echt unabh"angige Zufallsquelle ohne Ged"achtnis (die
+Wahrscheinlichkeit f"ur ein Zeichen ist unabh"angig von den vorangegangenen
+Zeichen), so gilt:
+
+$$2\cdot H(X)= H(X^2).$$
+Dabei ist $X^2$, die Zufallsquelle, welche entsteht, wenn man statt einem
+Zeichen immer zwei aufeinanderfolgende Zeichen betrachtet.
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(Verh"altnis Signal zu Verzerrung)}\\
+Schreiben Sie Routinen, die aus zwei Folgen von {\rm double}-Werten folgende
+Werte berechnen: Mittlerer quadratischer Fehler, Signal to Noise und Signal to
+Noise in Dezibel.
+
+\bigskip
+
+{\bf Aufgabe 3  \quad(Huffman)}\\
+Analog zu Ihrer Shannon-Fano-Kodierung sollen Sie hier die Huffman Kodierung
+implementieren.
+\begin{enumerate}
+\item Warum ist Huffman Kodierung (nicht) zur online Komprimierung geeignet?
+      Also z.B. zur Komprimierung von interaktiven Netzwerkverbindungen wie SSH.
+\item Implementieren und testen Sie Kodierungs- und Dekodierungsfunktionen zur
+      Huffman Kodierung. Als Ausgabe f"ur den Kodierer d"urfen Sie Strings von
+      0 und 1 statt Bitfolgen verwenden.
+\item(*) Implementieren Sie Ihre Huffman Kodierung so, dass Sie Bitfolgen statt
+      0 und 1 Strings ausgibt.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 4  \quad(BZIP2)}\\
+Betrachten Sie das Kompressionsverfahren bei BZIP2: Auf eine Eingabe wird
+zun"achst eine Burrows-Wheeler-Transformation angewandt, danach die
+Move-to-Front-Transformation und anschliessend die Huffman Kodierung.
+
+\begin{enumerate}
+\item Warum ist BZIP2 (nicht) zur online Komprimierung geeignet? Also z.B. zur
+      Komprimierung von interaktiven Netzwerkverbindungen wie SSH.
+\item Implementieren Sie BZIP2: Basierend auf Ihren L"osungen der letzten
+      Bl"atter, wenden Sie auf eine Eingabefolge nacheinander die BWT, die MtF
+      und schliesslich die Huffman Kodierung an.
+\item Implementieren Sie die Umkehrung von (ihrem) BZIP2.
+\item Erweitern Sie Ihren Kodierer um Speicher- und Ladefunktionen.
+      Verwenden Sie dazu wieder die Serialisierungsfunktionen Ihrer Sprache.
+\item(*) Stellen Sie Ihr BZIP2 auf die Probe: Wenden Sie Ihr Programm in einer
+      Schleife auf die Beispieldaten vom ersten Blatt an. Wenden Sie ebenfalls
+      das ,,echte'' BZIP2-Programm auf die Daten an. Vergleichen Sie die
+      Gr"ossen der Eingabe und der Ausgaben gegeneinander. Diskutieren Sie das
+      Ergebnis.
+\end{enumerate}
+
+Hinweis: Sollten Sie Aufgabe 3 nicht bearbeitet haben, so nehmen Sie statt dem
+Huffman Kodierer aus dieser Aufgabe Ihren Shannon-Fano Kodierer.
+
+\bigskip
+
+{\bf Aufgabe 5  \quad(BZIP2)}\\
+Betrachten Sie das Kompressionsverfahren bei BZIP2 wie bei Aufgabe 4.
+
+Wir erweitern das Verfahren um einen Gl"attungsschritt zwischen der BWT und
+der MtF. Das heisst, nach der BWT wird der String durchlaufen und jedes einzeln
+vorkommende Zeichen wird durch seinen Vorg"anger ersetzt. So wird aus
+,,aabaaabbbaacccacaa'' die Zeichenfolge ,,aaaaaabbbaacccccaa''. Danach l"auft
+der BZIP2 ab wie beschrieben. Durch diese "Anderung wird ein h"oherer
+Kompressionsgrad bewirkt, allerdings wird beim Dekodieren nicht mehr exakt das
+Original errechnet sondern nur eine Ann"aherung.
+
+\begin{enumerate}
+\item Implementieren Sie diese Variante des BZIP2.
+\item Errechnen Sie den Fehler nach Anwendung des modifizierten BZIP2 und seiner
+      Umkehrung. Verwenden Sie die Beispieldaten von Blatt 1 und diskutieren Sie
+      die Ergebnisse.
+\item Vergleichen Sie die Kompressionsgrade des normalen BZIP2 und des
+      modifizierten BZIP2. Diskutieren Sie die Ergebnisse.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 6  \quad(Fehlerbetrachtung)}\\
+Betrachten Sie den modifizierten BZIP2 aus Aufgabe 5.
+
+Angenommen es wird genau 1 Zeichen im Gl"attungsschritt ver"andert. Berechnen
+Sie, wie viele Zeichen sich nach der Dekodierung vom Original unterscheiden
+k"onnen.
+
+Angenommen, Sie h"atten den normalen BZIP2 ohne Gl"attung, und nach Anwendung
+des Huffmancodes w"urde ein Bit ver"andert. Wie viele Zeichen k"onnen sich
+nun im Original ver"andert haben?
+
+Vergleichen und diskutieren Sie Ihre Ergebnisse.
+
+Hinweis: Sie m"ussen hierf"ur Aufgabe 5 nicht gel"ost haben, es ist eine rein
+theoretische Abgabe gefragt.
+
+\end{document}
+
