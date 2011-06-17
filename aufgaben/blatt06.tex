@@ -1,0 +1,99 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+%\usepackage{fullpage}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{6}{17.06.2011}{03.07.2011}{}
+
+\bigskip
+
+{\bf Zum Blatt}\\
+Ziel dieses Blattes ist die Komprimierung von Bildern mit einer 8-bit Palette.
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(Bildkomprimierung)}\\
+Laden Sie von der "Ubungsseite das Material f"ur dieses Blatt herunter. Es
+enth"alt zwei Paare an Bildern, jeweils im PNG- und im GIF-Format. Die Bilder
+sind im Original einmal 493x329 Pixel und einmal 1024x768 Pixel. Daraus ergeben
+sich unkomprimierte Gr"ossen von 162197 Byte und 786432 Byte (zzgl. Daten f"ur
+die Palette).
+
+Wenn Sie sich die komprimierten Versionen ansehen, erkennen Sie, dass die Bilder
+einmal 13kB (GIF) bzw. 5kB (PNG) und einmal 455kB (GIF) bzw. 384kB (PNG). Beide
+Formate sind verlustfrei.
+
+Ihre Aufgabe:
+\begin{enumerate}
+\item Schreiben Sie ein Programm, welches ein Bild aus einer Datei einliest, und
+      dieses (auf beliebige Weise) komprimiert und in einer anderen Datei
+      ablegt. Die Zieldatei soll f"ur die Beispielbilder kleiner sein als eine
+      unkomprimierte Version.
+\item Schreiben Sie ein weiteres Programm, welches die Umkehrung zum vorherigen
+      Aufgabenschritt berechnet: Eingabe ist ein Bild in dem von Ihnen erzeugten
+      Format, Ausgabe ist in einem ''normalen'' Bildformat.
+\end{enumerate}
+
+Beachten Sie:
+\begin{enumerate}
+\item Sie m"ussen sich die Palette merken (in der Datei ablegen) um das Bild
+      wieder auslesen zu k"onnen. Gehen Sie hierbei von drei 8-bit Farbkan"alen
+      aus, also von 3 Byte pro Farbe. Welche drei Farben Sie w"ahlen bleibt
+      prinzipiell Ihnen "uberlassen, das resultierende Gamut sollte aber
+      mindestens den RGB Farbraum einschliessen.
+\item Ihre Programme m"ussen auf beliebige 8-bit Palettenbilder anwendbar sein.
+\item Verwenden Sie zum Einlesen des Originalbildes sowie zum Schreiben des
+      dekodierten Bildes jeweils Sprachkonstrukte Ihrer ausgew"ahlten
+      Programmiersprache. Ihre Sprache wird Ihnen dabei normalerweise auch
+      Objekte oder Datentypen zur Manipulation des Bildpuffers vorgeben.
+\item Die Ausgabe Ihres Kompressionsprogramms m"ussen Sie ''von Hand'' ablegen
+      und sp"ater wieder auslesen. Sie d"urfen also nicht einfach den
+      PNG-Kodierer ihrer Sprache verwenden; Serialisierungsfunktionen sind
+      erlaubt, werden Ihnen aber vermutlich nur bedingt weiterhelfen.
+\end{enumerate}
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(Bildkomprimierung)}\\
+Betrachten Sie Ihre Programme aus Aufgabe 1. Ihre Aufgabe ist es, diese
+Programme so zu erweitern, dass sie bei den Testbildern besser komprimieren
+(kleinere Ergebnisse liefern) als GIF.
+
+F"ur Anregungen k"onnen Sie sich die Spezifikation von PNG ansehen, z.B. die
+verschiedenen Filtertypen die im Standard vorgesehen sind. Die Spezifikation
+f"ur PNG ist unter ''http://www.w3.org/TR/PNG/'' erreichbar, Kapitel 9 enth"alt
+Details zu den Filtern, Kapitel 10 enth"alt einen kurzen Abriss der verwendeten
+Kompressionsmethode.
+
+\end{document}
+
