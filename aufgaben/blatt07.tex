@@ -1,0 +1,82 @@
+\documentclass[a4paper]{article}
+\usepackage[top=3.5cm,right=2.75cm,left=2.75cm,bottom=3.5cm]{geometry}
+
+\usepackage[german]{babel}
+%\usepackage{umlaut}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+%\usepackage{fullpage}
+\usepackage[latin1]{inputenc}
+
+\def\header#1#2#3#4{\pagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Datenkompression\\
+WSI f\"ur Informatik\\
+Krebs/Deininger
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2011\\
+Universit\"at T\"ubingen\\
+#2 %Datum eintragen
+\end{flushright}
+\end{minipage}
+
+\begin{center}
+{\Large\bf Blatt #1}
+
+{(Abgabe am #3)}
+\end{center}
+}
+
+\begin{document}
+\header{7}{30.06.2011}{10.07.2011}{}
+
+\bigskip
+
+{\bf Zum Blatt}\\
+Ziel dieses Blattes ist die Entwicklung eines Vektorquantisierers, der f"ur RGB
+Bilder verwendet werden kann.
+
+Als Beispielbild f"ur die Aufgaben dient uns das Foto auf der Startseite des
+Lehrstuhls:\\
+http://fuseki.informatik.uni-tuebingen.de/images/stories/gruppe-ws0809-small.jpg
+
+\bigskip
+
+{\bf Aufgabe 1  \quad(Vektorquantisierung)}\\
+Schreiben Sie Klassen, welche ein Bild als RGB-Farbbild einlesen und
+damit ein W"orterbuch trainieren k"onnen:
+Betrachten Sie die RGB Farbwerte der Pixel als $(R,G,B)$-Vektoren, und
+implementieren Sie die Lindo-Buzo-Gray- und Equitz-Verfahren, welche auf den
+Folien zur Vorlesung beschrieben sind.
+
+Halten Sie die Gr"osse des W"orterbuchs konfigurierbar.
+
+\bigskip
+
+{\bf Aufgabe 2  \quad(Vektorquantisierung)}\\
+Schreiben Sie ein Programm, welches das in Aufgabe 1 trainierte W"orterbuch
+verwendet und auf ein Bild anwendet. Das heisst, jeder Pixel wird auf einen
+Eintrag im W"orterbuch 'gerundet' und es wird nur der Index im W"orterbuch
+gespeichert. Legen Sie W"orterbuch und Indexfeld wieder mit den
+Serialisierungsfunktionen Ihrer Sprache in einer Datei ab, und schreiben Sie ein
+weiters Programm welches die Umkehrung berechnet.
+
+\bigskip
+
+{\bf Aufgabe 3  \quad(Beobachtungen)}\\
+Vergleichen Sie die Bildausgaben von Aufgabe 2 bei Verwendung verschiedener
+W"orterbuchgr"ossen (16, 32, 64 Eintr"age) und die beiden Verfahren
+untereinander. Vergleichen Sie weiter die Bildausgaben bei Verwendung von
+'falschen' W"orterb"uchern, also zB indem Sie das W"orterbuch mit einem anderen
+Bild als dem zu kodierenden trainieren, oder indem Sie ein zuf"alliges
+W"orterbuch generieren.
+
+Diskutieren Sie Ihre Ergebnisse.
+
+\end{document}
+
